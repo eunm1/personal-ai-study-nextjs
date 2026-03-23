@@ -1,0 +1,87 @@
+.card {
+  width: 100%;
+  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 24px;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0; /* 💡 리스트에서 찌그러짐 방지 */
+}
+
+.imagePlaceholder {
+  width: 100%;
+  /* 💡 핵심: 어떤 상황에서도 너비 대비 16:9 비율을 유지하게 합니다 */
+  aspect-ratio: 16 / 9; 
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  flex-shrink: 0; /* 💡 높이가 0이 되는 걸 방지 */
+}
+
+.imagePlaceholder::before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    content: "";
+}
+
+.imagePlaceholder > img{
+    z-index: 1;
+    height: 100%;
+}
+
+.cardContent {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.statusBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: #2563eb;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.title {
+  margin: 0 0 8px 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.summary {
+  margin: 0;
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 세 줄만 보여줌 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-top: 20px;
+}

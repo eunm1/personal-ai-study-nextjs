@@ -1,0 +1,1 @@
+// [2. 포스트 상세화면] # 상세 페이지 (Server Component로 데이터 fetch)
