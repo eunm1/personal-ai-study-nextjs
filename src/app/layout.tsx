@@ -11,8 +11,10 @@ if (!globalThis.api) {
 
 export default function RootLayout({
   children,
+  modal
 }: Readonly<{
   children: React.ReactNode;
+  modal : React.ReactNode;
 }>) {
   return (
     <html lang="ko">
@@ -27,6 +29,8 @@ export default function RootLayout({
           </header>
           <main className={style.main}>
               {children}
+          {modal}
+          <div id="modal-root"></div>
           </main>
           <button className={style.fab}>+</button>
           <footer className={style.footer}>제작 @eunm1</footer>

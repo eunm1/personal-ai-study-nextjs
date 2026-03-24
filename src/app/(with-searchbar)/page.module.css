@@ -11,7 +11,12 @@
 
 .layoutContainer {
   width: 100%;
+  max-width: 920px;
   padding: 20px; /* 💡 실제 콘텐츠가 들어있는 이곳에 패딩 부여 */
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
   box-sizing: border-box;
 }
 

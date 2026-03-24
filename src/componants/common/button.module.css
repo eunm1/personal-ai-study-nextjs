@@ -1,0 +1,46 @@
+/* 기본 공통 스타일 */
+.button {
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-size: 1rem;
+}
+
+/* 🎨 색상 옵션 */
+.blue {
+  background-color: #2563eb;
+  color: white;
+}
+.blue:hover { 
+  background-color: #1d4ed8; /* 기존 #2563eb보다 한 단계 어두운 파랑 */
+  color: white; /* 글자색은 그대로 유지 */
+}
+
+.gray {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+.gray:hover { background-color: #e2e8f0; }
+
+/* 📱 앱 모드: 하단 고정 (전체 너비) */
+.appFixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* 화면 꽉 차게 */
+  height: 60px;
+  border-radius: 0; /* 하단 고정은 직각이 예뻐요 */
+  z-index: 100;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05); /* 위쪽으로 살짝 그림자 */
+}
+
+/* 💻 웹 모드: 일반 버튼 */
+.webDefault {
+  min-width: 100px;
+}

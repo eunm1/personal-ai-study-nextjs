@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./SearchBar.module.css";
+import style from "./SearchBar.module.css";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SearchBar() {
@@ -47,16 +47,16 @@ export default function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className={styles.container}>
+    <form onSubmit={handleFormSubmit} className={style.container}>
       <input
         type="text"
-        className={styles.input}
+        className={style.input}
         value={search}
         onChange={onChangeSearch}
         onKeyDown={onKeyDown}
         placeholder="어떤 일기를 찾으시나요?"
       />
-      <button type="submit" className={styles.button}>
+      <button type="submit" className={style.button}>
         검색
       </button>
     </form>

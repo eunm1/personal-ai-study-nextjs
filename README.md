@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 - step 3 사용 예시
 ```
 const handleUpdate = async (id: number) => {
-  const result = await api.patch(`/posts/${id}`, { 
+  const result = await api.patch(`/post/${id}`, { 
     content: '수정된 포스트 내용입니다.' 
   });
   console.log('수정 완료:', result);

@@ -1,0 +1,163 @@
+/* src/componants/posts/post-detail.module.css */
+
+.wrapper {
+  /* 💡 수직 중앙 배치를 위해 전체 화면 높이를 사용 */
+  display: flex;
+  align-items: center; /* 수직 중앙 */
+  justify-content: center; /* 수평 중앙 */
+  min-height: calc(100vh - 80px); /* 헤더 높이를 뺀 나머지 */
+  padding: 0px 40px;
+  background-color: #fff;
+}
+
+/* 💡 웹용: 이미지와 텍스트 비율 1:1, 높이 고정 그리드 */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 1:1 비율 */
+  gap: 60px; /* 양옆 간격 넓힘 */
+  max-width: 1400px; /* 최대 너비 넓힘 */
+  width: 100%;
+  height: 700px; /* 💡 웹 전용: 전체 높이 고정 (이미지 크기에 맞춤) */
+  align-items: end; /* 💡 웹 전용: 글이 적을 때 하단 정렬 */
+}
+
+/* 1. 이미지 섹션 (왼쪽) */
+.imageSection {
+  height: 100%; /* 부모 높이에 맞춤 */
+}
+
+.aiImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 💡 높이 고정이므로 cover 사용 */
+  border-radius: 28px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* 2. 텍스트 섹션 (오른쪽) */
+.contentSection {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* 부모 .contentGrid의 700px를 따름 */
+  justify-content: flex-start; 
+  overflow: hidden; /* 💡 밖으로 절대 못 나가게 차단 */
+}
+
+.header {
+  flex-shrink: 0;
+  margin-bottom: 30px;
+}
+
+.categoryTag {
+  font-family: 'DM Serif Display', serif; /* 💡 잡지 스타일 폰트 (선택) */
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.title {
+  font-size: 1.8rem; /* 💡 제목 크기 키움 */
+  font-weight: 800;
+  margin: 10px 0;
+  line-height: 1.3;
+}
+
+.meta {
+  display: flex;
+  gap: 15px;
+  color: #a0aec0;
+  font-size: 1rem;
+  margin-top: 15px;
+}
+
+
+
+/* 💡 훅이 감시할 영역: 여기가 바로 670 * 345 정도의 크기가 됩니다 */
+.pageContentArea {
+  flex: 1; 
+  width: 100%;
+  /* margin: 20px 0; */
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  /* background-color: #f9f9f9; // 💡 테스트할 때 영역 확인용으로 써보세요! */
+}
+
+.diaryText {
+  font-size: 15px;
+  line-height: 1.9;
+
+  overflow: hidden;
+  height: 100%; 
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow-wrap: break-word;
+
+  white-space: pre-wrap; /* 💡 줄바꿈 유지를 위해 필수! */
+  word-break: break-all;
+  color: #2d3748;
+  margin: 0;
+  text-align: justify; /* 잡지처럼 양끝 정렬 */
+}
+
+/* 💡 페이지 번호와 버튼 정렬 */
+.pageNavigation {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #edf2f7; /* 구분선 하나 넣어주면 더 고급져요 */
+}
+
+/* 페이지 조절 버튼 */
+
+.pageNavigation .pagebutton {
+  padding: 5px 15px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+
+.pageNum {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4a5568;
+  min-width: 60px;
+  text-align: center;
+}
+
+@keyframes pageFlipEffect {
+  0% { transform: rotateY(-10deg); opacity: 0.5; }
+  100% { transform: rotateY(0deg); opacity: 1; }
+}
+
+/* --- 반응형 처리 (웹 vs 앱) --- */
+
+/* 모바일 전용 컨텐츠 기본 숨김 */
+.mobileContent {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .pageContentArea, .pageNavigation{
+    display: none; /* 웹용 페이지네이션 숨김 */
+  }
+  .mobileContent {
+    display: block; /* 앱용 세로 스크롤 활성화 */
+  }
+  .contentGrid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .wrapper {
+    padding: 0px 10px;
+  }
+}

@@ -1,0 +1,37 @@
+/* PostDetail.module.css */
+.wrapper {
+  display: flex;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 왼쪽: 이미지 영역 */
+.imageSection {
+  flex: 1;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.aiImage {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* 오른쪽: 본문 영역 */
+.contentSection {
+  flex: 1.2;
+}
+
+/* 📱 모바일 대응 (앱 형태) */
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column; /* 세로로 변경 */
+    gap: 20px;
+  }
+  .imageSection {
+    position: static;
+  }
+}
