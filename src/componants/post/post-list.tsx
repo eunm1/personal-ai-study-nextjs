@@ -10,7 +10,7 @@ export default function PostList({ searchPostList }: { searchPostList: PostData[
         <>
         {
             searchPostList.map((post) => (
-                <Link href={`/post/${post.id}`} key={`search-post-${post.id}`} className={`${style.card}`}>
+                <Link href={`/post/view/${post.id}`} key={`search-post-${post.id}`} className={`${style.card}`}>
                 <div 
                 className={style.imagePlaceholder} 
                 >

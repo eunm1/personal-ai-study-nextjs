@@ -2,6 +2,7 @@ import "./globals.css";
 import style from "./layout.module.css";
 import Link from "next/link";
 import { api } from '@/lib/api';
+import FloatingButton from "@/componants/common/floating-button";
 
 if (!globalThis.api) {
   globalThis.api = api;
@@ -16,6 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
   modal : React.ReactNode;
 }>) {
+
   return (
     <html lang="ko">
       <body className={style.container}>
@@ -29,11 +31,11 @@ export default function RootLayout({
           </header>
           <main className={style.main}>
               {children}
-          {modal}
+              {modal}
           <div id="modal-root"></div>
           </main>
-          <button className={style.fab}>+</button>
           <footer className={style.footer}>제작 @eunm1</footer>
+          <FloatingButton />
       </body>
     </html>
   );

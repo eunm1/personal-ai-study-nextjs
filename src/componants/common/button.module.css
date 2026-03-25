@@ -20,6 +20,7 @@
 .blue:hover { 
   background-color: #1d4ed8; /* 기존 #2563eb보다 한 단계 어두운 파랑 */
   color: white; /* 글자색은 그대로 유지 */
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); /* 파란색 은은한 그림자 */
 }
 
 .gray {
@@ -30,6 +31,7 @@
 
 /* 📱 앱 모드: 하단 고정 (전체 너비) */
 .appFixed {
+  flex: 1;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -43,4 +45,34 @@
 /* 💻 웹 모드: 일반 버튼 */
 .webDefault {
   min-width: 100px;
+}
+
+.sm { padding: 6px 12px; font-size: 0.85rem; }
+.md { padding: 10px 20px; font-size: 1rem; }
+.lg { padding: 14px 28px; font-size: 1.1rem; }
+
+/* 💻 웹: 우측 상단 정렬, 버튼 사이 간격 10px */
+.webGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+  width: 100%;
+}
+
+/* 📱 앱: 하단 전체 고정, 버튼이 가로를 꽉 채움 */
+.appGroup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  z-index: 999;
+}
+
+/* 💡 앱 모드일 때 내부의 모든 버튼을 1:1 비율로 강제 확장 */
+.appGroup > button {
+  flex: 1;
+  border-radius: 0; /* 하단 고정은 각진 게 깔끔함 */
+  height: 60px;
 }

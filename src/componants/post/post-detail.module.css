@@ -145,7 +145,7 @@
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 720px) {
   .pageContentArea, .pageNavigation{
     display: none; /* 웹용 페이지네이션 숨김 */
   }

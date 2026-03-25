@@ -17,7 +17,7 @@ export default function PostCard({
     category,
 }:PostData){
     return( 
-    <Link href={`/post/${id}`} className={`${style.card}`}>
+    <Link href={`/post/view/${id}`} className={`${style.card}`}>
         <div 
         className={style.imagePlaceholder} 
         style={{ 

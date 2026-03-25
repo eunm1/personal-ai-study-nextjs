@@ -6,7 +6,7 @@ export function useDevice() {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1024); // 1024px 미만은 모바일로 간주
+      setIsMobile(window.innerWidth <= 720); // 900px 미만은 모바일로 간주
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);

@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 async function PostListContainer() {
     await delay(1200); //페이지 suspence 테스트용
   const posts : PostData[] = await api.get(`/post`,
-    // {next: { revalidate: 3 }}
+    {next: { revalidate: 3 }}
 );
     // 2. 가져온 데이터를 클라이언트 컴포넌트에 'Props'로 넘겨줍니다.
   return <>

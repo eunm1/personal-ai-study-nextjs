@@ -1,5 +1,5 @@
-import PostPage from "@/app/post/[id]/page";
-import Modal from "@/componants/modal/modal";
+import PostPage from "@/app/post/view/[id]/page";
+import Modal from "@/componants/common/modal/modal";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -8,7 +8,7 @@ interface Props {
 export default function Page({ params }: Props){
     return (
         <Modal params={params}>
-            <PostPage params={params} />
+            <PostPage params={params} isModal={true}/>
         </Modal>
     )
 }

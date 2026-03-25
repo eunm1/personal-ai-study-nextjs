@@ -1,0 +1,15 @@
+/* auto-resize-textarea-module.css (또는 관련 CSS) */
+
+.contentArea {
+  width: 100%;
+  font-size: 15px;      /* 💡 폰트 크기 살짝 키움 */
+  line-height: 1.4;     /* 💡 줄 간격을 1.8로 설정 (시원시원해짐) */
+  letter-spacing: -0.02em; /* 💡 자간을 살짝 좁히면 더 고급져요 */
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: #2d3748;
+  font-family: 'Pretendard', sans-serif; /* 💡 깔끔한 폰트 권장 */
+}
