@@ -3,16 +3,20 @@
 import PostDetail from "@/componants/post/post-detail";
 import { PostData } from "@/types/post-types";
 import { Suspense } from "react";
+import style from "./page.module.css"
+import PostDetailSkeleton from "@/componants/post/skeleton/post-detail-skeleton";
 
 async function PostDetailContent({postId, isModal}:{postId: string; isModal:boolean;}) {
   const response : PostData = await api.get(`/post/${postId}`,
-    {cache : "force-cache"}
+    {next: { 
+      // tags: ['posts'] 
+    }}
   );
 
   return (
-    <>
+    <div className={style.pageWrapper}>
         <PostDetail post={response} isModal={isModal}/>
-    </>
+    </div>
   );
 }
 
@@ -26,7 +30,7 @@ export default async function Page({
     console.log("test")
   return (
   <div>
-    <Suspense fallback={<div>상세 내용을 읽어오는 중...</div>}>
+    <Suspense fallback={<PostDetailSkeleton />}>
         {/* 💡 웹/앱 반응형 UI가 담긴 공통 컴포넌트 */}
         <PostDetailContent postId={(await params).id} isModal={isModal}/>
     </Suspense>

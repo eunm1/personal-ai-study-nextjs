@@ -51,3 +51,10 @@ const handleUpdate = async (id: number) => {
   console.log('수정 완료:', result);
 }
 ```
+
+------------------------
+## 설치 라이브러리 
+1. npm install swiper
+
+2. npm install sonner //toast 
+- RootLayout에 작성

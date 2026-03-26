@@ -8,7 +8,9 @@ import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";
 import SelectGroup from "@/componants/common/SelectGroup";
 import AutoResizeTextarea from "@/componants/common/AutoResizeTextarea";
-import { createReviewAction } from "@/actions/create-post.action";
+import { createPostAction } from "@/actions/create-post.action";
+import { getOrCreateTempUserId } from "@/util/common";
+import PostForm from "@/componants/post/post-form";
 
 const oprions = [
   { id: "1", value: 'soft watercolor painting, pastel colors, dreamy atmosphere, artistic texture', label: "차분한 수채화 🥐" , discription: '에세이, 일상 기록, 감성적인 글'},
@@ -20,63 +22,16 @@ const oprions = [
 
 export default function WritePage() {
 
-  const [state, formAction, isPending] = useActionState(createReviewAction, null);
-
-  // 이미지 스타일 선택 상태 관리
-  const [selectedValue, setSelectedValue] = useState("");
-
-  // 콘텐츠 작성
-  const [content, setContent] = useState("");
-
-  const { isMobile } = useDevice();
+  const [state, formAction, isPending] = useActionState(createPostAction, null);
 
   return (
     <div className={style.pageContainer}>
-      <form action={formAction}>
-      {/* 1. 상단 액션 바 (웹: 상단 / 앱: 하단 고정) */}
-      <ButtonGroup mode={isMobile ? "app" : "web"}>
-        <Button variant="gray" size={isMobile ? "md" : "sm"}>취소</Button>
-        <Button variant="blue" size={isMobile ? "md" : "sm"} type="submit" disabled={isPending}>
-          {isPending ? "저장 중..." : "저장하기"}
-        </Button>
-      </ButtonGroup>
-
-        {/* 2. 제목 (가장 크게, 테두리 없이 하단 선만) */}
-        <input className={style.titleInput} name="title" placeholder="제목을 입력하세요" />
-
-        {/* 3. 💡 작성자 & 비밀번호 */}
-        <div className={style.authorInfo}>
-
-            <input className={style.infoInput} name="author" placeholder="작성자" />
-
-
-            {/* 💡 비밀번호는 오른쪽 끝에 붙임 */}
-            <input type="password" className={style.infoInput} name="password" placeholder="비밀번호"/>
-
-        </div>
-
-        {/* 4. 💡 이미지 스타일 (체크박스 3개) */}
-        <div className={style.fieldGroup}>
-          <label className={style.label}>이미지 스타일</label>
-          <SelectGroup 
-              selectType="checkbox"
-              name="style"
-              options={oprions} 
-              selectedValue={selectedValue} 
-              onChange={setSelectedValue} 
-            />
-        </div>
-
-        {/* 5. 본문 (스크롤 없이 쭉 늘어나는 구조) : Auto-expanding Textarea*/}
-        <AutoResizeTextarea 
-          name="content"
-          value={content} 
-          onChange={setContent} 
-          placeholder="글을 작성해주세요..." 
-        />
-        {/* 서버 에러 메시지 표시 */}
-        {state?.error && <p className={style.error}>{state.error}</p>}
-      </form>
+      <PostForm 
+        formAction={formAction}
+        isPending={isPending}
+        state={state}
+      >
+      </PostForm>
     </div>
   );
 }

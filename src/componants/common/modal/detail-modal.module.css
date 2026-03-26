@@ -1,0 +1,28 @@
+.modal{
+    width: 80%;
+    border-radius: 5px;
+    border: none;
+}
+
+.modal::backdrop{
+    background-color: rgba(0,0,0,0.7);
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem; /* 💡 X 크기 */
+  font-weight: 300;
+  line-height: 1;
+  color: #a0aec0;
+  cursor: pointer;
+  z-index: 10; /* 본문보다 위에 뜨도록 */
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: #2d3748;
+}

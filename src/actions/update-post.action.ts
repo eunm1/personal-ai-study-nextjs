@@ -4,9 +4,10 @@
 import { redirect } from "next/navigation";
 import { clearPostCache } from "./clear-post-cach.action";
 
-export async function createPostAction(prevState: any, formData: FormData) {
+export async function updatePostAction(prevState: any, formData: FormData) {
 console.log(formData)
     // 1. 데이터 추출
+  const postId = formData.get("id")?.toString() || "";
   const title = formData.get("title")?.toString() || "";
   const author = formData.get("author")?.toString() || "";
   const style = formData.get("style")?.toString() || "";
@@ -25,7 +26,7 @@ console.log(formData)
   try {
     // 3. DB 저장 로직 (예: Supabase, Prisma 등)
     // await db.post.create({ data: { title, author, style, content } });
-    await api.post(`/post`,{
+    await api.patch(`/post/${postId}`,{
       title,
       content,
       author,

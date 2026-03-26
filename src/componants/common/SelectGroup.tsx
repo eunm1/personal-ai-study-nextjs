@@ -43,7 +43,7 @@ export default function SelectGroup({
       {options.map((opt) => (
         <label 
             key={opt.value} 
-            className={`${style.styleLabel} ${selectedValue === opt.value ? style.active : ''}`}>
+            className={`${style.styleLabel} ${isChecked(opt.value) ? style.active : ''}`}>
               <input 
               type={selectType} 
               name={name}

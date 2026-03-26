@@ -29,6 +29,12 @@
 }
 .gray:hover { background-color: #e2e8f0; }
 
+.red {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+.red:hover { background-color: #e2e8f0; }
+
 /* 📱 앱 모드: 하단 고정 (전체 너비) */
 .appFixed {
   flex: 1;

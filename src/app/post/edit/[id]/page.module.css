@@ -1,0 +1,159 @@
+/* 전체를 감싸는 컨테이너: 중앙 정렬 및 기본 여백 */
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  /* 앱(모바일) 기본 여백: 좁게 */
+  padding: 1rem;
+}
+
+/* 실제 내용이 들어가는 박스 */
+.contentWrapper {
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  padding-bottom: 30px;
+  flex-direction: column;
+}
+
+.fieldGroup {
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #f1f5f9; /* 제목 밑에 줄 */
+}
+
+.label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+
+/* 앱 전용 상단 이미지 영역 */
+.mobileImageBanner {
+  width: 100%;
+  height: 100%;
+  background-color: #e9ecef;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileImageBanner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 데스크탑 프리뷰 (기본은 숨김) */
+.desktopPreview {
+  display: none;
+}
+
+/* 💻 웹(데스크탑) 화면 대응 (1024px 이상) */
+@media (min-width: 720px) {
+  .pageContainer {
+    padding: 3rem 10rem; /* 웹에선 여백 넉넉히 */
+  }
+
+  /* 웹일 땐 모바일 전용 배너 숨김 */
+  .mobileImageBanner {
+    display: none;
+  }
+
+  .contentWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 3rem; /* 💡 사이 간격을 조금 더 넓혀서 시원하게! */
+    align-items: flex-start;
+  }
+
+  /* 🖼️ 왼쪽 프리뷰 영역 (60%로 확장!) 👿 */
+  .desktopPreview {
+    flex: 6; 
+    max-width: 60%;
+    position: sticky;
+    top: 2rem;
+    height: calc(100vh - 4rem);
+    background: #f8fafc;
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 💡 중앙 정렬 */
+    overflow: hidden; /* 💡 내부 스크롤 원천 봉쇄! */
+    padding: 2rem;
+  }
+
+  /* 💡 스크롤 없이 비율대로 줄어드는 핵심 래퍼 */
+  .previewScaleWrapper {
+    position: relative;
+    width: 1100px; /* 💡 기준이 되는 넓은 웹 너비 */
+    aspect-ratio: 16 / 9; /* 💡 16:9 비율 유지 */
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    padding: 40px;
+    overflow: hidden; /* 💡 내부 스크롤 안 생기게! */
+
+    /* 💡 [핵심] 부모 너비(60%)에 맞춰서 내용물을 비율대로 축소 🕵️‍♀️ */
+    transform-origin: center center;
+    /* 6:4 비율에서 60% 영역에 1100px 박스를 넣으려면 약 0.5~0.6배가 적당해요 */
+    transform: scale(0.65); 
+    
+    /* 💡 scale 때문에 생기는 유령 여백을 제거해서 딱 붙입니다. */
+    margin: 0 -20%; 
+  }
+
+  .previewTitleBadge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #4f46e5;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+  }
+
+  /* 📝 오른쪽 폼 영역 (40%로 축소) */
+  .formArea {
+    flex: 4;
+    max-width: 40%;
+    min-width: 420px;
+    position: relative;
+    padding-right: 1rem;
+    /* 폼은 내용이 길 수 있으니 자체 스크롤 허용 */
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+}
+
+/* AI 옵션 박스 (요청하신 스타일 유지) */
+.aiOptionsBox {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fff9db;
+  border: 1px solid #ffe066;
+  border-radius: 1rem;
+}
+
+.aiCheckboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #856404;
+}

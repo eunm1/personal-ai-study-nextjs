@@ -1,5 +1,5 @@
 import PostPage from "@/app/post/view/[id]/page";
-import Modal from "@/componants/common/modal/modal";
+import Modal from "@/componants/common/modal/detail-modal";
 
 interface Props {
   params: Promise<{ id: string }>;

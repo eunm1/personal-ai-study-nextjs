@@ -9,6 +9,7 @@ export default function FloatingButton() {
   const router = useRouter();
 
   if (pathname.startsWith("/post/write")) return null;
+  if (pathname.startsWith("/post/edit")) return null;
 
   const handleNavigate = (e: React.MouseEvent) => {
     // 1. 뒤로 가는 모든 신호를 원천 봉쇄

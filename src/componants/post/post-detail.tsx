@@ -8,9 +8,11 @@ import { formatDate } from "@/util/common";
 import { useMemo, useRef, useState } from "react";
 import { usePageCalculator } from "@/hooks/use-page-calculator";
 import { usePostPager } from "@/hooks/use-page-paper";
+import { useRouter } from "next/navigation";
 
-export default function PostDetail({ post , isModal=false}: { post: PostData , isModal:boolean}) {
-
+export default function PostDetail({ post , isModal=false, isShow=true}: { post: PostData , isModal?:boolean, isShow?:boolean}) {
+  const router = useRouter();
+  
   const { isMobile } = useDevice();
   
   // 💡 텍스트가 담길 영역을 참조합니다.
@@ -22,6 +24,19 @@ export default function PostDetail({ post , isModal=false}: { post: PostData , i
 
   // 💡 글자 수(charsPerPage)가 바뀔 때마다 본문을 다시 나눕니다.
   const pages = usePostPager(post.content, charsPerPage, contentRef);
+
+  const handleNavigate = (e: React.MouseEvent) => {
+
+    router.back();
+
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setTimeout(() => {
+      router.push(`/post/edit/${post.id}`);
+    }, 100);
+  };
+  
     
   return (
     <article className={style.wrapper}>
@@ -78,8 +93,8 @@ export default function PostDetail({ post , isModal=false}: { post: PostData , i
               onClick={() => setCurrentPage(p => p + 1)}
             >다음</button>
 
-            {!isMobile && (
-              <Button variant="blue" mode="web">수정</Button>
+            {!isMobile && isShow && (
+              <Button variant="blue" mode="web" onClick={handleNavigate}>수정하기</Button>
             )}
           </div>
 
@@ -87,9 +102,9 @@ export default function PostDetail({ post , isModal=false}: { post: PostData , i
           <div className={style.mobileContent}>
              <p className={style.diaryText}>{post.content}</p>
           </div>
-          {isMobile && !isModal && (
+          {isMobile && !isModal && isShow && (
           <footer className={style.mobileFooter}>
-            <Button variant="blue" mode="app">수정하기</Button>
+            <Button variant="blue" mode="app" onClick={handleNavigate}>수정하기</Button>
           </footer>
         )}
       </section>

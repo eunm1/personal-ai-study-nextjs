@@ -2,7 +2,7 @@
 import style from "./button.module.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "blue" | "gray"; // 💡 파랑 vs 회색
+  variant?: "blue" | "gray" | "red"; // 💡 파랑 vs 회색
   mode?: "web" | "app";     // 💡 웹 vs 앱(하단 고정)
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
