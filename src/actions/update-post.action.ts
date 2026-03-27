@@ -12,14 +12,14 @@ console.log(formData)
   const author = formData.get("author")?.toString() || "";
   const style = formData.get("style")?.toString() || "";
   const content = formData.get("content")?.toString() || "";
-  const password = formData.get("password")?.toString() || "";
   const tempUserId = formData.get("tempUserId")?.toString() || "";
+  const reAnalyze = formData.get("reAnalyze")?.toString() === "true";
 
   // 💡 만약 content 안에 진짜 JSON 객체를 넣고 싶다면? (예: 에디터 데이터)
   // const contentObj = JSON.parse(formData.get("content") as string);
 
   // 2. 간단한 유효성 검사
-  if (!title || !content || !author || !password) {
+  if (!title || !content || !author ) {
     return { error: "모든 필드를 입력해주세요." };
   }
 
@@ -30,9 +30,9 @@ console.log(formData)
       title,
       content,
       author,
-      password,
       style,
-      tempUserId
+      tempUserId,
+      reAnalyze
     });
 
     console.log("저장될 데이터:", { title, author, style, content });

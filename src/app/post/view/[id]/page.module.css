@@ -12,3 +12,9 @@
   margin: 0;
   overflow: hidden; /* 👿 절대 스크롤 안 생기게 차단! */
 }
+
+@media (max-width: 720px) {
+  .pageWrapper {
+    height: 100%; 
+  }
+}

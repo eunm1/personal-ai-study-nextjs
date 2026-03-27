@@ -10,6 +10,7 @@ import SelectGroup from "@/componants/common/SelectGroup";
 import AutoResizeTextarea from "@/componants/common/AutoResizeTextarea";
 import { getOrCreateTempUserId } from "@/util/common";
 import { PostData, PostFormProps } from "@/types/post-types";
+import { usePostForm } from "@/hooks/use-post-form";
 
 const oprions = [
   { id: "1", value: 'soft watercolor painting, pastel colors, dreamy atmosphere, artistic texture', label: "차분한 수채화 🥐" , discription: '에세이, 일상 기록, 감성적인 글'},
@@ -19,16 +20,15 @@ const oprions = [
 ];
 
 export default function PostForm({ 
-    initialData, 
-    formAction, 
-    isPending, 
-    state, 
+    initialData,
     onChange,
     children }: PostFormProps) {
 
     const { isMobile } = useDevice();
 
     const tempUserId = getOrCreateTempUserId();
+
+    const { formAction, isPending, isEdit } = usePostForm(initialData);
 
     // 이미지 스타일 선택 상태 관리
     const [selectedValue, setSelectedValue] = useState(initialData?.analysis?.style ||"");
@@ -54,13 +54,10 @@ export default function PostForm({
         <Button variant="blue" size={isMobile ? "md" : "sm"} type="submit" disabled={isPending}>
           {isPending ? "저장 중..." : "저장하기"}
         </Button>
-        {/* 초기데이터가 있으면 or pathname 이 edit이면 삭제하기 버튼 추가 */}
-        {initialData?.title ? <Button variant="red" size={isMobile ? "md" : "sm"}>
-          {isPending ? "삭제 중..." : "삭제하기"}
-        </Button> : ''}
       </ButtonGroup>
 
         <input type="hidden" name="tempUserId" value={tempUserId} />
+        <input type="hidden" name="id" value={initialData?.id} />
 
         {/* 2. 제목 (가장 크게, 테두리 없이 하단 선만) */}
         <input className={style.titleInput} name="title" placeholder="제목을 입력하세요" defaultValue={initialData?.title || ""} onChange={onChange}/>
@@ -72,7 +69,7 @@ export default function PostForm({
 
 
             {/* 💡 비밀번호는 오른쪽 끝에 붙임 */}
-            <input type="password" className={style.infoInput} name="password" placeholder="비밀번호" onChange={onChange}/>
+            {!isEdit &&<input type="password" className={style.infoInput} name="password" placeholder="비밀번호"/>}
 
         </div>
 
@@ -104,8 +101,6 @@ export default function PostForm({
             }} 
           placeholder="글을 작성해주세요..." 
         />
-        {/* 서버 에러 메시지 표시 */}
-        {state?.error && <p className={style.error}>{state.error}</p>}
     </form>
   );
 }

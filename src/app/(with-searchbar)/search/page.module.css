@@ -7,7 +7,7 @@
 }
 
 /* 모바일: 1열 */
-@media (max-width: 767px) {
+@media (max-width: 720px) {
   .container {
     grid-template-columns: 1fr;
   }

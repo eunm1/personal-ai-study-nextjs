@@ -5,14 +5,17 @@ import Button from "@/componants/common/Button";
 import { PostData } from "@/types/post-types";
 import style from "./post-detail.module.css";
 import { formatDate } from "@/util/common";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePageCalculator } from "@/hooks/use-page-calculator";
 import { usePostPager } from "@/hooks/use-page-paper";
 import { useRouter } from "next/navigation";
+import ButtonGroup from "../common/ButtonGroup";
+import { usePostDeleteForm } from "@/hooks/use-post-form";
+import { deletePostAction } from "@/actions/delete-post.action";
 
 export default function PostDetail({ post , isModal=false, isShow=true}: { post: PostData , isModal?:boolean, isShow?:boolean}) {
   const router = useRouter();
-  
+
   const { isMobile } = useDevice();
   
   // 💡 텍스트가 담길 영역을 참조합니다.
@@ -25,6 +28,8 @@ export default function PostDetail({ post , isModal=false, isShow=true}: { post:
   // 💡 글자 수(charsPerPage)가 바뀔 때마다 본문을 다시 나눕니다.
   const pages = usePostPager(post.content, charsPerPage, contentRef);
 
+
+  // 수정 페이지로 이동
   const handleNavigate = (e: React.MouseEvent) => {
 
     router.back();
@@ -35,6 +40,34 @@ export default function PostDetail({ post , isModal=false, isShow=true}: { post:
     setTimeout(() => {
       router.push(`/post/edit/${post.id}`);
     }, 100);
+  };
+
+  //삭제 form
+  const [isPending, setIsPending] = useState(false);
+const handleDelete = async () => {
+    if (!confirm("정말 삭제하시겠어요? 🌹")) return;
+    setIsPending(true); // 로딩 시작
+
+    const formData = new FormData();
+    formData.append("id", post.id.toString());
+
+    // 서버 액션을 직접 호출합니다.
+    const result = await deletePostAction('', formData);
+
+    if (result?.error) {
+      alert(result.error);
+    }else{
+        if(isModal){
+          router.back();
+          setTimeout(() => {
+            router.push("/");
+            router.refresh();
+          }, 100);
+        } else{
+          router.replace("/"); 
+          router.refresh();
+        }
+    }
   };
   
     
@@ -51,7 +84,7 @@ export default function PostDetail({ post , isModal=false, isShow=true}: { post:
               />
               ) : (
               <div className={style.placeholder}>
-                  <span>이미지 생성 중...</span>
+                  <span>{post.analysis?.status}...</span>
               </div>
               )}
         </section>
@@ -83,7 +116,7 @@ export default function PostDetail({ post , isModal=false, isShow=true}: { post:
               className={style.pagebutton}
               disabled={currentPage === 0} 
               onClick={() => setCurrentPage(p => p - 1)}
-            >이전</button>
+            >{'<'}</button>
             
             <span className={style.pageNum}>{currentPage + 1} / {pages.length}</span>
             
@@ -91,22 +124,35 @@ export default function PostDetail({ post , isModal=false, isShow=true}: { post:
               className={style.pagebutton}
               disabled={currentPage === pages.length - 1} 
               onClick={() => setCurrentPage(p => p + 1)}
-            >다음</button>
+            >{'>'}</button>
 
             {!isMobile && isShow && (
-              <Button variant="blue" mode="web" onClick={handleNavigate}>수정하기</Button>
-            )}
+              <ButtonGroup mode="web">
+                  <Button variant="blue" mode="web" size="sm" onClick={handleNavigate}>수정하기</Button>
+                  <Button variant="red" mode="web" size="sm" onClick={handleDelete} 
+                    disabled={isPending}>
+                    {isPending ? "삭제 중..." : "삭제하기"}
+                  </Button>
+              </ButtonGroup>
+            ) }
           </div>
 
           {/* 💡 앱 전용: 일반 세로 스크롤 */}
           <div className={style.mobileContent}>
              <p className={style.diaryText}>{post.content}</p>
+              {isMobile && isShow && (
+              <footer className={style.mobileFooter}>
+                <ButtonGroup mode="app">
+                  <Button variant="blue"  size="md" onClick={handleNavigate}>수정하기</Button>
+                  {/* 초기데이터가 있으면 or pathname 이 edit이면 삭제하기 버튼 추가 */}
+                  <Button variant="red" size="md" onClick={handleDelete} 
+                    disabled={isPending}>
+                    {isPending ? "삭제 중..." : "삭제하기"}
+                  </Button>
+                </ButtonGroup>
+              </footer>
+            )}
           </div>
-          {isMobile && !isModal && isShow && (
-          <footer className={style.mobileFooter}>
-            <Button variant="blue" mode="app" onClick={handleNavigate}>수정하기</Button>
-          </footer>
-        )}
       </section>
       </div>
     </article>

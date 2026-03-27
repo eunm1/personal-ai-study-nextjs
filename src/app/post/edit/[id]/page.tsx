@@ -7,7 +7,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
 
   // 💡 상세 페이지(PostDetail)와 똑같은 방식으로 서버에서 데이터 fetch!
   const response: PostData = await api.get(`/post/${id}`, {
-    cache: "no-store", // 수정 페이지니까 최신 데이터를 가져와야겠죠? 👿
+    cache: "no-store", // 수정 페이지니까 최신 데이터를 가져와야함
   });
 
   return (

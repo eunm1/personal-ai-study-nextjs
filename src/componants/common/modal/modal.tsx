@@ -1,11 +1,5 @@
 import "@/styles/edit-page.css";
-
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title?: string;
-  children: React.ReactNode;
-}
+import { ModalProps } from "@/types/common-types";
 
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
   if (!isOpen) return null;

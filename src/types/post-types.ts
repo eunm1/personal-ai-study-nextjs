@@ -25,9 +25,6 @@ export interface PostData {
 
 export interface PostFormProps {
   initialData?: PostData; // 데이터가 있으면 수정, 없으면 등록 👿
-  formAction: (formData: FormData) => void; // 페이지에서 넘겨줄 서버 액션/함수
   children?: React.ReactNode; // AI 체크박스 같은 추가 요소를 넣을 자리
-  isPending: boolean; // 부모가 준 로딩 상태
-  state: any; // 서버 에러 상태
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }

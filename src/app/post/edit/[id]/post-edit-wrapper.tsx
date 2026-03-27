@@ -1,8 +1,7 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useState } from "react";
 import PostForm from "@/componants/post/post-form";
-import { updatePostAction } from "@/actions/update-post.action";
 import { PostData } from "@/types/post-types";
 import style from "./page.module.css";
 import { useDevice } from "@/hooks/use-device";
@@ -13,8 +12,8 @@ const oprions = [
   { id: "1", value: 'true', label: "AI 재요약 & 이미지 재생성"},
 ];
 
+
 export default function PostEditFormWrapper({ initialData }: { initialData: PostData }) {
-  const [state, formAction, isPending] = useActionState(updatePostAction, null);
   const { isMobile } = useDevice();
 
   const [selectedValue, setSelectedValue] = useState<string[]>([]);
@@ -70,19 +69,21 @@ export default function PostEditFormWrapper({ initialData }: { initialData: Post
       <div className={style.formArea}>
         <PostForm 
           initialData={initialData}
-          formAction={formAction}
-          isPending={isPending}
-          state={state}
           onChange={handleInputChange}
         >
           {/* AI 옵션 주입 */}
           <div className={style.fieldGroup}>
           <SelectGroup 
               selectType="checkbox"
-              name="style"
+              name="reAnalyze_checkbox"
               options={oprions} 
               selectedValue={selectedValue} 
               onChange={handleTagChange} 
+            />
+            <input 
+              type="hidden" 
+              name="reAnalyze" 
+              value={selectedValue.includes('true') ? 'true' : 'false'} 
             />
         </div>
         </PostForm>

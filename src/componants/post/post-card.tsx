@@ -24,7 +24,7 @@ export default function PostCard({
             backgroundImage: analysis?.imageUrl ? `url("${analysis.imageUrl}")` : 'none' 
         }}
         >
-            <span className={style.statusBadge}>{analysis?.status == 'COMPLETED' ? 'AI 완료' : '생성중'}</span>
+            <span className={style.statusBadge}>{analysis?.status == 'COMPLETED' ? 'AI 완료' : analysis?.status == 'FAILED' ? '실패' : '생성중'}</span>
             {analysis?.imageUrl ? (
             <img 
                 src={analysis.imageUrl} 

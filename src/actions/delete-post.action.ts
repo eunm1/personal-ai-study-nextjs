@@ -17,10 +17,13 @@ export async function deletePostAction(prevState: any, formData: FormData) {
     console.log(`${postId} 삭제`);
     await clearPostCache('/')
 
-  } catch (e) {
-    return { error: "저장 중 오류가 발생했습니다." };
-  }
+    return {
+            status:true,
+            error : ""
+        }
 
-  // 4. 성공 시 이동
-  redirect("/");
+  } catch (e) {
+    console.log(e)
+    return { status:false, error: "저장 중 오류가 발생했습니다." };
+  }
 }

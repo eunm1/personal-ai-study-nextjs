@@ -6,7 +6,7 @@
   align-items: center; /* 수직 중앙 */
   justify-content: center; /* 수평 중앙 */
   /* min-height: calc(100vh - 80px); 헤더 높이를 뺀 나머지 */
-  padding: 0px 40px;
+  /* padding: 0px 40px; */
   background-color: #fff;
 }
 
@@ -17,6 +17,7 @@
   gap: 60px; /* 양옆 간격 넓힘 */
   max-width: 1400px; /* 최대 너비 넓힘 */
   width: 100%;
+  aspect-ratio: 16 / 9;
   align-items: end; /* 💡 웹 전용: 글이 적을 때 하단 정렬 */
 }
 
@@ -150,6 +151,7 @@
   }
   .mobileContent {
     display: block; /* 앱용 세로 스크롤 활성화 */
+    padding-bottom: 70px;
   }
   .contentGrid {
     grid-template-columns: 1fr;

@@ -11,7 +11,6 @@
   width: 100%;
   display: flex;
   gap: 2rem;
-  padding-bottom: 30px;
   flex-direction: column;
 }
 
@@ -56,7 +55,7 @@
 /* 💻 웹(데스크탑) 화면 대응 (1024px 이상) */
 @media (min-width: 720px) {
   .pageContainer {
-    padding: 3rem 10rem; /* 웹에선 여백 넉넉히 */
+    padding: 0 10rem; /* 웹에선 여백 넉넉히 */
   }
 
   /* 웹일 땐 모바일 전용 배너 숨김 */
@@ -85,7 +84,6 @@
     justify-content: center;
     align-items: center; /* 💡 중앙 정렬 */
     overflow: hidden; /* 💡 내부 스크롤 원천 봉쇄! */
-    padding: 2rem;
   }
 
   /* 💡 스크롤 없이 비율대로 줄어드는 핵심 래퍼 */
@@ -131,6 +129,7 @@
     max-width: 40%;
     min-width: 420px;
     position: relative;
+    padding-top: 10px;
     padding-right: 1rem;
     /* 폼은 내용이 길 수 있으니 자체 스크롤 허용 */
     height: calc(100vh - 4rem);
