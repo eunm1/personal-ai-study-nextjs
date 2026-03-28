@@ -155,6 +155,7 @@
   }
   .contentGrid {
     grid-template-columns: 1fr;
+    aspect-ratio: auto;
     height: auto;
   }
 

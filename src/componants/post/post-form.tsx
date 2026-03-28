@@ -24,6 +24,7 @@ export default function PostForm({
     onChange,
     children }: PostFormProps) {
 
+    const router = useRouter();
     const { isMobile } = useDevice();
 
     const tempUserId = getOrCreateTempUserId();
@@ -46,11 +47,12 @@ export default function PostForm({
         }
     };
 
+
   return (
     <form action={formAction}>
       {/* 1. 상단 액션 바 (웹: 상단 / 앱: 하단 고정) */}
       <ButtonGroup mode={isMobile ? "app" : "web"}>
-        <Button variant="gray" size={isMobile ? "md" : "sm"}>취소</Button>
+        <Button variant="gray" size={isMobile ? "md" : "sm"} onClick={()=> router.back()}>취소</Button>
         <Button variant="blue" size={isMobile ? "md" : "sm"} type="submit" disabled={isPending}>
           {isPending ? "저장 중..." : "저장하기"}
         </Button>
