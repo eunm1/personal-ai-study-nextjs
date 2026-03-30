@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { usePathname, useRouter } from 'next/navigation';
 import { clearPostCache } from '@/actions/clear-post-cach.action';
+import { useProgressStore } from '@/hooks/use-progress-store';
 
 export default function NotificationListener() {
   const router = useRouter();
@@ -30,7 +31,7 @@ export default function NotificationListener() {
             }
             });
 
-        }else{
+        }else if(data.status === 'COMPLETED'){
             await clearPostCache('/');
             // await clearPostCache(`/post/view/${data.postId}`);
             
@@ -46,6 +47,12 @@ export default function NotificationListener() {
       
               // 데이터를 최신화함
               router.refresh();
+        }else{
+          useProgressStore.getState().setProgress(data.postId, {
+            status: data.status,
+            message: data.message,
+            percent: data.percent || 0
+          });
         }
     };
 

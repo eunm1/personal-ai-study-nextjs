@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Modal from "@/componants/common/modal/modal";
+import Modal from "@/componants/common/modal/Modal";
 import { ModalProps } from "@/types/common-types";
 import "@/styles/modal.css"; // 👈 CSS 임포트 잊지 마세요!
 

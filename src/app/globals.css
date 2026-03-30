@@ -10,3 +10,39 @@ html, body {
 body > div {
   height: 100%;
 }
+
+/* globals.css */
+
+[data-sonner-toast] {
+  /* 배경은 진한 파랑에서 검정으로 이어지는 느낌 */
+  background-color: #0A192F !important; 
+  /* 테두리를 노란색으로 줘서 포인트를 살려요! */
+  border: 1.5px solid #FACC15 !important;
+  /* 글자는 요청하신 대로 깔끔한 흰색 */
+  color: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  padding: 16px !important;
+  font-family: 'Pretendard', sans-serif; /* 은미님이 쓰시는 폰트로 맞춰주세요 */
+}
+
+/* 토스트 내부의 설명(description) 글자색 */
+[data-sonner-toast] [data-description] [data-type="success"] {
+  color: #E2E8F0 !important; /* 약간 연한 회색빛 흰색으로 가독성 업! */
+}
+
+/* 성공 아이콘이나 포인트가 되는 부분은 노란색으로 */
+[data-sonner-toast] [data-icon] [data-type="success"] {
+  color: #FACC15 !important;
+}
+
+/* 🚨 실패(Error)일 때: 빨간색 테두리와 그림자로 경고! */
+[data-sonner-toast][data-type="error"] {
+  border: 1.5px solid #EF4444 !important; /* 강렬한 레드 테두리 */
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); /* 은은한 레드 광택 */
+}
+
+/* 🚨 실패 아이콘 색상 변경 */
+[data-sonner-toast][data-type="error"] [data-icon] {
+  color: #EF4444 !important;
+}
